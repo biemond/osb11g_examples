@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/typesystem/config" xmlns:con2="http://www.bea.com/wli/sb/stages/alert/config" xmlns:con3="http://www.bea.com/wli/sb/stages/config" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con5="http://www.bea.com/wli/sb/stages/routing/config">
+  <ser:coreEntry isProxy="true" isEnabled="true">
+    <ser:binding type="Mixed" xsi:type="con:MixedBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config">
+      <con:response type="Text"/>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>http</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>/rest</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>false</tran:all-headers>
+    <tran:provider-specific>
+      <http:inbound-properties/>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router>
+    <con:pipeline type="request" name="PipelinePairNode1_request">
+      <con:stage name="log url">
+        <con:context>
+          <con1:variable name="rest" path="$url">
+            <con1:xml-schema type="string"/>
+          </con1:variable>
+        </con:context>
+        <con:actions>
+          <con4:assign varName="action">
+            <con3:id>_ActionId-3954953099660775729--2bf2bf28.12106125a51.-7f7a</con3:id>
+            <con4:expr>
+              <con3:xqueryText>fn:substring-before(fn:substring-after($inbound/ctx:transport/ctx:request/http:relative-URI/text(),'/'),'/')</con3:xqueryText>
+            </con4:expr>
+          </con4:assign>
+          <con4:assign varName="format">
+            <con3:id>_ActionId-3954953099660775729--2bf2bf28.12106125a51.-7ef2</con3:id>
+            <con4:expr>
+              <con3:xqueryText>$inbound/ctx:transport/ctx:request/http:query-string/text()</con3:xqueryText>
+            </con4:expr>
+          </con4:assign>
+          <con2:alert>
+            <con2:destination ref="Rest/AlertDestinationForLogging"/>
+            <con3:id>_ActionId-3309593558852921130--19023a31.120f7fba6e3.-7c99</con3:id>
+            <con2:description>url =</con2:description>
+            <con2:severity>normal</con2:severity>
+            <con2:payload>
+              <con3:xqueryText><![CDATA[<alert>
+<url>{$inbound/ctx:transport/ctx:request/http:relative-URI/text()}</url>
+<action>{fn:substring-before(fn:substring-after($inbound/ctx:transport/ctx:request/http:relative-URI/text(),'/'),'/')}</action>
+<id>{fn:substring-after(fn:substring-after($inbound/ctx:transport/ctx:request/http:relative-URI/text(),'/'),'/')}</id>
+<output>{$inbound/ctx:transport/ctx:request/http:query-string}</output>
+</alert>]]></con3:xqueryText>
+            </con2:payload>
+          </con2:alert>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNode1_response">
+      <con:stage name="json conversion">
+        <con:context/>
+        <con:actions>
+          <con4:javaCallout varName="calloutResult">
+            <con3:id>_ActionId-3954953099660775729--2bf2bf28.12106125a51.-7f93</con3:id>
+            <con4:archive ref="Rest/jars/osbjson"/>
+            <con4:className>nl.whitehorses.json.XmlToJson</con4:className>
+            <con4:method>public static java.lang.String xmlToJson(org.apache.xmlbeans.XmlObject, java.lang.String, java.lang.String)</con4:method>
+            <con4:expr>
+              <con3:xqueryText>$body</con3:xqueryText>
+            </con4:expr>
+            <con4:expr>
+              <con3:xqueryText>$action</con3:xqueryText>
+            </con4:expr>
+            <con4:expr>
+              <con3:xqueryText>$format</con3:xqueryText>
+            </con4:expr>
+          </con4:javaCallout>
+          <con2:alert>
+            <con2:destination ref="Rest/AlertDestinationForLogging"/>
+            <con3:id>_ActionId-3954953099660775729--2bf2bf28.12106125a51.-7f28</con3:id>
+            <con2:description>json result</con2:description>
+            <con2:severity>normal</con2:severity>
+            <con2:payload>
+              <con3:xqueryText>$calloutResult</con3:xqueryText>
+            </con2:payload>
+          </con2:alert>
+          <con4:assign varName="body">
+            <con3:id>_ActionId-3954953099660775729--2bf2bf28.12106125a51.-7f0e</con3:id>
+            <con4:expr>
+              <con3:xqueryText>&lt;soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">  
+{$calloutResult}
+&lt;/soapenv:Body></con3:xqueryText>
+            </con4:expr>
+          </con4:assign>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:pipeline-node name="PipelinePairNode1">
+        <con:request>PipelinePairNode1_request</con:request>
+        <con:response>PipelinePairNode1_response</con:response>
+      </con:pipeline-node>
+      <con:route-node name="RouteNode">
+        <con:context>
+          <con3:varNsDecl namespace="http://www.example.org/url" prefix="url"/>
+          <con1:variable name="employees" path="$url" asChild="false">
+            <con1:schema ref="Rest/url" element="url"/>
+          </con1:variable>
+        </con:context>
+        <con:actions>
+          <con4:ifThenElse>
+            <con3:id>_ActionId-3309593558852921130--19023a31.120f7fba6e3.-7b68</con3:id>
+            <con4:case>
+              <con4:condition>
+                <con3:xqueryText>$inbound/ctx:transport/ctx:request/http:relative-URI[fn:starts-with(.,'/employees')]</con3:xqueryText>
+              </con4:condition>
+              <con4:actions>
+                <con4:ifThenElse>
+                  <con3:id>_ActionId-5166301850280266593--7a9b66e4.120fc7046d4.-7dca</con3:id>
+                  <con4:case>
+                    <con4:condition>
+                      <con3:xqueryText>fn:contains($inbound/ctx:transport/ctx:request/http:relative-URI/text(),'/')</con3:xqueryText>
+                    </con4:condition>
+                    <con4:actions>
+                      <con5:route>
+                        <con3:id>_ActionId-5166301850280266593--7a9b66e4.120fc7046d4.-7d0d</con3:id>
+                        <con5:service ref="Rest/bs/hr" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con5:outboundTransform>
+                          <con4:assign varName="url">
+                            <con3:id>_ActionId-5166301850280266593--7a9b66e4.120fc7046d4.-7d0c</con3:id>
+                            <con4:expr>
+                              <con3:xqueryText>&lt;url>http://localhost:8080/oradb/HR/EMPLOYEES/ROW%5BEMPLOYEE_ID={fn:substring-after(fn:substring-after($inbound/ctx:transport/ctx:request/http:relative-URI/text(),'/'),'/')}%5D&lt;/url></con3:xqueryText>
+                            </con4:expr>
+                          </con4:assign>
+                          <con4:assign varName="endpoint">
+                            <con3:id>_ActionId-5166301850280266593--7a9b66e4.120fc7046d4.-7cd1</con3:id>
+                            <con4:expr>
+                              <con3:xqueryText>fn:escape-uri($url/text(), false())</con3:xqueryText>
+                            </con4:expr>
+                          </con4:assign>
+                          <con4:routing-options>
+                            <con3:id>_ActionId-5166301850280266593--7a9b66e4.120fc7046d4.-7d0b</con3:id>
+                            <con4:uriExpr>
+                              <con3:xqueryText>$endpoint</con3:xqueryText>
+                            </con4:uriExpr>
+                          </con4:routing-options>
+                        </con5:outboundTransform>
+                        <con5:responseTransform/>
+                      </con5:route>
+                    </con4:actions>
+                  </con4:case>
+                  <con4:default>
+                    <con5:route>
+                      <con3:id>_ActionId-5166301850280266593--7a9b66e4.120fc7046d4.-7cd3</con3:id>
+                      <con5:service ref="Rest/bs/hr" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                      <con5:outboundTransform/>
+                      <con5:responseTransform/>
+                    </con5:route>
+                  </con4:default>
+                </con4:ifThenElse>
+              </con4:actions>
+            </con4:case>
+            <con4:case>
+              <con4:condition>
+                <con3:xqueryText>$inbound/ctx:transport/ctx:request/http:relative-URI[fn:starts-with(.,'/orders')]</con3:xqueryText>
+              </con4:condition>
+              <con4:actions>
+                <con4:ifThenElse>
+                  <con3:id>_ActionId-5166301850280266593--7a9b66e4.120fc7046d4.-7c99</con3:id>
+                  <con4:case>
+                    <con4:condition>
+                      <con3:xqueryText>fn:contains($inbound/ctx:transport/ctx:request/http:relative-URI/text(),'/')</con3:xqueryText>
+                    </con4:condition>
+                    <con4:actions>
+                      <con5:route>
+                        <con3:id>_ActionId-5166301850280266593--7a9b66e4.120fc7046d4.-7c2b</con3:id>
+                        <con5:service ref="Rest/bs/oe" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con5:outboundTransform>
+                          <con4:assign varName="url">
+                            <con3:id>_ActionId-5166301850280266593--7a9b66e4.120fc7046d4.-7bee</con3:id>
+                            <con4:expr>
+                              <con3:xqueryText>&lt;url>http://localhost:8080/oradb/OE/ORDERS/ROW%5BORDER_ID={fn:substring-after(fn:substring-after($inbound/ctx:transport/ctx:request/http:relative-URI/text(),'/'),'/')}%5D&lt;/url></con3:xqueryText>
+                            </con4:expr>
+                          </con4:assign>
+                          <con4:assign varName="endpoint">
+                            <con3:id>_ActionId-5166301850280266593--7a9b66e4.120fc7046d4.-7bed</con3:id>
+                            <con4:expr>
+                              <con3:xqueryText>fn:escape-uri($url/text(), false())</con3:xqueryText>
+                            </con4:expr>
+                          </con4:assign>
+                          <con4:routing-options>
+                            <con3:id>_ActionId-5166301850280266593--7a9b66e4.120fc7046d4.-7bec</con3:id>
+                            <con4:uriExpr>
+                              <con3:xqueryText>$endpoint</con3:xqueryText>
+                            </con4:uriExpr>
+                          </con4:routing-options>
+                        </con5:outboundTransform>
+                        <con5:responseTransform/>
+                      </con5:route>
+                    </con4:actions>
+                  </con4:case>
+                  <con4:default>
+                    <con5:route>
+                      <con3:id>_ActionId-5166301850280266593--7a9b66e4.120fc7046d4.-7c62</con3:id>
+                      <con5:service ref="Rest/bs/oe" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                      <con5:outboundTransform/>
+                      <con5:responseTransform/>
+                    </con5:route>
+                  </con4:default>
+                </con4:ifThenElse>
+              </con4:actions>
+            </con4:case>
+            <con4:default>
+              <con5:route>
+                <con3:id>_ActionId-3309593558852921130--19023a31.120f7fba6e3.-7afa</con3:id>
+                <con5:service ref="Rest/bs/other" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                <con5:outboundTransform/>
+                <con5:responseTransform>
+                  <con4:assign varName="body">
+                    <con3:id>_ActionId-3309593558852921130--19023a31.120f7fba6e3.-7a63</con3:id>
+                    <con4:expr>
+                      <con3:xqueryText>&lt;soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+unknown rest request
+&lt;/soapenv:Body></con3:xqueryText>
+                    </con4:expr>
+                  </con4:assign>
+                </con5:responseTransform>
+              </con5:route>
+            </con4:default>
+          </con4:ifThenElse>
+        </con:actions>
+      </con:route-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

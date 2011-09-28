@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/services/security/config" xmlns:con5="http://www.bea.com/wli/sb/stages/alert/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isTracingEnabled="false" isAutoPublish="false">
+    <ser:description/>
+    <ser:serviceProvider ref="security/ServiceKey"/>
+    <ser:security>
+      <con4:inboundWss processWssHeader="true"/>
+    </ser:security>
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con5:SoapBindingType" xmlns:con5="http://www.bea.com/wli/sb/services/bindings/config">
+      <con5:wsdl ref="security/wsdl/HelloworldNormal"/>
+      <con5:port>
+        <con5:name>HelloWorldServiceSoapHttpPort</con5:name>
+        <con5:namespace>http://saml.ws.whitehorses.nl/</con5:namespace>
+      </con5:port>
+      <con5:selector type="SOAP body">
+        <con5:mapping operation="sayHello" value=""/>
+      </con5:selector>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>owsm-policy-bindings</ser:binding-mode>
+      <ser:policies>
+        <ser:service-policy>
+          <ser:owsm-policy-ref ID="oracle/wss10_message_protection_service_policy"/>
+        </ser:service-policy>
+      </ser:policies>
+    </ser:ws-policy>
+    <ser:pageAttachments isEnabled="false"/>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>http</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>/security/HelloworldPlain</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>false</tran:all-headers>
+    <tran:provider-specific>
+      <http:inbound-properties/>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router>
+    <con:flow>
+      <con:route-node name="RouteNode1">
+        <con:context/>
+        <con:actions>
+          <con1:route>
+            <con2:id>_ActionId-7364516661626893980--3005b11c.1217bd4d6ce.-7faf</con2:id>
+            <con1:service ref="security/bs/File" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:outboundTransform>
+              <con5:alert>
+                <con5:destination ref="security/AlertDestinationForLogging"/>
+                <con2:id>_ActionId-8006348450428254689--475ec1ca.121aab1263a.-7f92</con2:id>
+                <con5:description>header</con5:description>
+                <con5:severity>normal</con5:severity>
+                <con5:payload>
+                  <con2:xqueryText>$header</con2:xqueryText>
+                </con5:payload>
+              </con5:alert>
+            </con1:outboundTransform>
+            <con1:responseTransform>
+              <con3:assign varName="body">
+                <con2:id>_ActionId-5355823089431052312-7eb1056.1217c7e72ca.-7fad</con2:id>
+                <con3:expr>
+                  <con2:xqueryText><![CDATA[<soapenv:Body xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">  
+ <ns2:sayHelloResponse xmlns:ns2="http://saml.ws.whitehorses.nl/">
+  <return>Hello world</return>
+ </ns2:sayHelloResponse>
+</soapenv:Body>]]></con2:xqueryText>
+                </con3:expr>
+              </con3:assign>
+            </con1:responseTransform>
+          </con1:route>
+        </con:actions>
+      </con:route-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

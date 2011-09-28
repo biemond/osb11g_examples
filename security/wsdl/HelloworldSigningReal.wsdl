@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WL5G3N2:definitions name="HelloWorldService" targetNamespace="http://saml.ws.whitehorses.nl/" xmlns:WL5G3N0="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:WL5G3N1="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:WL5G3N2="http://schemas.xmlsoap.org/wsdl/" xmlns:WL5G3N3="http://saml.ws.whitehorses.nl/" xmlns:WL5G3N4="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy">
+  <WL5G3N0:Policy WL5G3N1:Id="Sign.xml">
+    <wssp:Integrity xmlns:wls="http://www.bea.com/wls90/security/policy/wsee#part" xmlns:wssp="http://www.bea.com/wls90/security/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+      <wssp:SignatureAlgorithm URI="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+      <wssp:CanonicalizationAlgorithm URI="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+      <wssp:Target>
+        <wssp:DigestAlgorithm URI="http://www.w3.org/2000/09/xmldsig#sha1"/>
+        <wssp:MessageParts Dialect="http://www.bea.com/wls90/security/policy/wsee#part"> 
+        wls:SystemHeaders()
+      </wssp:MessageParts>
+      </wssp:Target>
+      <wssp:Target>
+        <wssp:DigestAlgorithm URI="http://www.w3.org/2000/09/xmldsig#sha1"/>
+        <wssp:MessageParts Dialect="http://www.bea.com/wls90/security/policy/wsee#part"> 
+        wls:SecurityHeader(wsu:Timestamp)
+      </wssp:MessageParts>
+      </wssp:Target>
+      <wssp:Target>
+        <wssp:DigestAlgorithm URI="http://www.w3.org/2000/09/xmldsig#sha1"/>
+        <wssp:MessageParts Dialect="http://schemas.xmlsoap.org/2002/12/wsse#part">
+      wsp:Body()
+      </wssp:MessageParts>
+      </wssp:Target>
+      <wssp:SupportedTokens>
+        <wssp:SecurityToken IncludeInMessage="true" TokenType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3">
+          <wssp:TokenIssuer>CN=client,OU=it,O=whitehorses,ST=utrecht,C=NL,CN=ca,C=NL,ST=utrecht,L=nieuwegein,OU=it,O=whitehorses,CN=laptopedwin.wh.lan,OU=it,O=whitehorses,ST=utrecht,C=NL,</wssp:TokenIssuer>
+        </wssp:SecurityToken>
+      </wssp:SupportedTokens>
+    </wssp:Integrity>
+    <wssp:MessageAge Age="60" xmlns:wssp="http://www.bea.com/wls90/security/policy"/>
+  </WL5G3N0:Policy>
+  <wsp:UsingPolicy WL5G3N2:Required="true"/>
+  <WL5G3N2:types>
+    <xsd:schema xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/" xmlns:WL5G3N1="http://saml.ws.whitehorses.nl/" xmlns:WL5G3N2="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://saml.ws.whitehorses.nl/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="http://saml.ws.whitehorses.nl/" schemaLocation="../xsd/Helloworld.xsd"/>
+    </xsd:schema>
+  </WL5G3N2:types>
+  <WL5G3N2:message name="sayHello">
+    <WL5G3N2:part element="WL5G3N3:sayHello" name="parameters"/>
+  </WL5G3N2:message>
+  <WL5G3N2:message name="sayHelloResponse">
+    <WL5G3N2:part element="WL5G3N3:sayHelloResponse" name="parameters"/>
+  </WL5G3N2:message>
+  <WL5G3N2:portType name="HelloWorldService">
+    <WL5G3N2:operation name="sayHello">
+      <WL5G3N2:input message="WL5G3N3:sayHello"/>
+      <WL5G3N2:output message="WL5G3N3:sayHelloResponse"/>
+    </WL5G3N2:operation>
+  </WL5G3N2:portType>
+  <WL5G3N2:binding name="HelloWorldServiceSoapHttpPortBinding" type="WL5G3N3:HelloWorldService">
+    <WL5G3N4:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <WL5G3N2:operation name="sayHello">
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#Sign.xml"/>
+      </wsp:Policy>
+      <WL5G3N4:operation/>
+      <WL5G3N2:input>
+        <WL5G3N4:body use="literal"/>
+      </WL5G3N2:input>
+      <WL5G3N2:output>
+        <WL5G3N4:body use="literal"/>
+      </WL5G3N2:output>
+    </WL5G3N2:operation>
+  </WL5G3N2:binding>
+  <WL5G3N2:service name="HelloWorldService">
+    <WL5G3N2:port binding="WL5G3N3:HelloWorldServiceSoapHttpPortBinding" name="HelloWorldServiceSoapHttpPort">
+      <WL5G3N4:address location="http://LAPTOPEDWIN.wh.lan:7001/security/proxy/HelloworldSigning"/>
+    </WL5G3N2:port>
+  </WL5G3N2:service>
+</WL5G3N2:definitions>

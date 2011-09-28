@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services">
+  <ser:type>proxy-service-provider</ser:type>
+  <ser:credentials>
+    <ser:key-pair purpose="Encryption">
+      <ser:alias>client</ser:alias>
+      <ser:password>welcome</ser:password>
+    </ser:key-pair>
+    <ser:key-pair purpose="DigitalSignature">
+      <ser:alias>server</ser:alias>
+      <ser:password>welcome</ser:password>
+    </ser:key-pair>
+  </ser:credentials>
+</xml-fragment>

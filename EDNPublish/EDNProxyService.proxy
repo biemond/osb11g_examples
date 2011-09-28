@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:env="http://www.bea.com/wli/config/env" xmlns:jms="http://www.bea.com/wli/sb/transports/jms" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isAutoPublish="false">
+    <ser:description/>
+    <ser:binding type="abstract XML"/>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>jms</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>jms://localhost:7001/weblogic.jms.XAConnectionFactory/EDNProxyServiceRequest</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>false</tran:all-headers>
+    <tran:provider-specific>
+      <jms:is-queue>true</jms:is-queue>
+      <jms:is-secure>false</jms:is-secure>
+      <jms:inbound-properties>
+        <jms:response-required>false</jms:response-required>
+        <jms:XA-required>false</jms:XA-required>
+      </jms:inbound-properties>
+      <jms:request-encoding>UTF-8</jms:request-encoding>
+      <jms:jndi-timeout>0</jms:jndi-timeout>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router>
+    <con:flow>
+      <con:route-node name="RouteTo_EDNPublish">
+        <con:context/>
+        <con:actions>
+          <con1:route xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config">
+            <conid1:id xmlns:conid1="http://www.bea.com/wli/sb/stages/config">_ActionId-2024278242656878770--314705b2.130ae78ddbe.-7ffe</conid1:id>
+            <con1:service ref="EDNPublish/EDNPublish" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+            <con1:outboundTransform>
+              <con3:replace varName="body" contents-only="true" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+                <con2:id>_ActionId-2024278242656878770--314705b2.130ae78ddbe.-7fca</con2:id>
+                <con3:location>
+                  <con2:xpathText>.</con2:xpathText>
+                </con3:location>
+                <con3:expr>
+                  <con2:xqueryText><![CDATA[<business-event xmlns:ns="http://schemas.oracle.com/events/edl/EmployeeEventEDL" 
+                xmlns="http://oracle.com/fabric/businessEvent">
+   <name>ns:EmployeeEvent</name>
+   <id>{fn-bea:uuid()}</id>
+   <tracking>
+      <ecid>{fn-bea:uuid()}</ecid>
+   </tracking>
+   <content>
+      <Employee xmlns="http://nl.whitehorses.employee.event">
+         <Id>110</Id>
+      </Employee>
+   </content>
+</business-event>]]></con2:xqueryText>
+                </con3:expr>
+              </con3:replace>
+              <con3:transport-headers xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+                <con2:id>_ActionId-2024278242656878770--314705b2.130ae78ddbe.-7fdd</con2:id>
+                <con3:header-set>outbound-request</con3:header-set>
+                <con3:header name="MessageType" value="expression">
+                  <con2:xqueryText>'Remote'</con2:xqueryText>
+                </con3:header>
+                <con3:header name="SideCar" value="expression">
+                  <con2:xqueryText>&lt;business-event-sidecar xmlns:ns="http://schemas.oracle.com/events/edl/EmployeeEventEDL" xmlns="http://oracle.com/fabric/sideCar"> 
+&lt;name xmlns="http://oracle.com/fabric/businessEvent">ns:EmployeeEvent-sidecar&lt;/name> 
+&lt;/business-event-sidecar></con2:xqueryText>
+                </con3:header>
+              </con3:transport-headers>
+            </con1:outboundTransform>
+            <con1:responseTransform/>
+          </con1:route>
+        </con:actions>
+      </con:route-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

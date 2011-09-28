@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment>
+  <aler:description xmlns:aler="http://www.bea.com/wli/monitoring/alert">This alert destination has been created automatically by the resource upgraders. Alert Destinations are required for all alerts. All alerts without an alert destination under this project, are also upgraded to point to this alert destination. This alert destination simply logs alerts.</aler:description>
+  <aler:AlertToConsole xmlns:aler="http://www.bea.com/wli/monitoring/alert">true</aler:AlertToConsole>
+  <aler:AlertToReportingDataSet xmlns:aler="http://www.bea.com/wli/monitoring/alert">false</aler:AlertToReportingDataSet>
+  <aler:AlertToSNMP xmlns:aler="http://www.bea.com/wli/monitoring/alert">false</aler:AlertToSNMP>
+</xml-fragment>

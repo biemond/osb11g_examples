@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<j2ee:java-wsdl-mapping xmlns:j2ee="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <j2ee:package-mapping>
+    <j2ee:package-type>osb.book.soap.jms</j2ee:package-type>
+    <j2ee:namespaceURI>http://wsrm.osbbook</j2ee:namespaceURI>
+  </j2ee:package-mapping>
+  <j2ee:service-interface-mapping>
+    <j2ee:service-interface>osb.book.soap.jms.HelloWorldServiceSoapHttpPortBindingQSService</j2ee:service-interface>
+    <j2ee:wsdl-service-name xmlns:wsrm="http://wsrm.osbbook">wsrm:HelloWorldServiceSoapHttpPortBindingQSService</j2ee:wsdl-service-name>
+    <j2ee:port-mapping>
+      <j2ee:port-name>HelloWorldServiceSoapHttpPortBindingQSPort</j2ee:port-name>
+      <j2ee:java-port-name>HelloWorldServiceSoapHttpPortBindingQSPort</j2ee:java-port-name>
+    </j2ee:port-mapping>
+  </j2ee:service-interface-mapping>
+  <j2ee:service-endpoint-interface-mapping>
+    <j2ee:service-endpoint-interface>osb.book.soap.jms.HelloWorldService</j2ee:service-endpoint-interface>
+    <j2ee:wsdl-port-type xmlns:wsrm="http://wsrm.osbbook">wsrm:HelloWorldService</j2ee:wsdl-port-type>
+    <j2ee:wsdl-binding xmlns:wsrm="http://wsrm.osbbook">wsrm:HelloWorldServiceSoapHttpPortBinding</j2ee:wsdl-binding>
+    <j2ee:service-endpoint-method-mapping>
+      <j2ee:java-method-name>sayHello</j2ee:java-method-name>
+      <j2ee:wsdl-operation>sayHello</j2ee:wsdl-operation>
+      <j2ee:wrapped-element></j2ee:wrapped-element>
+      <j2ee:wsdl-return-value-mapping>
+        <j2ee:method-return-value>java.lang.String</j2ee:method-return-value>
+        <j2ee:wsdl-message xmlns:wsrm="http://wsrm.osbbook">wsrm:sayHelloResponse</j2ee:wsdl-message>
+        <j2ee:wsdl-message-part-name>return</j2ee:wsdl-message-part-name>
+      </j2ee:wsdl-return-value-mapping>
+    </j2ee:service-endpoint-method-mapping>
+  </j2ee:service-endpoint-interface-mapping>
+</j2ee:java-wsdl-mapping>

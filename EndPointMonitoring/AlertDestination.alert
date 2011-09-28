@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:aler="http://www.bea.com/wli/monitoring/alert" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:env="http://www.bea.com/wli/config/env" xmlns:ema="http://www.bea.com/wli/sb/transports/email">
+  <aler:description/>
+  <aler:AlertToConsole>true</aler:AlertToConsole>
+  <aler:AlertToReportingDataSet>true</aler:AlertToReportingDataSet>
+  <aler:AlertToSNMP>false</aler:AlertToSNMP>
+  <aler:Destinations type="email">
+    <aler:config xsi:type="ema:EmailActionProviderConfiguration" email-body="" xmlns:ema="http://www.bea.com/wli/monitoring/alert/action/email">
+      <ema:transport-end-point-config>
+        <ema:config xsi:type="tran:EndPointConfiguration" xmlns:tran="http://www.bea.com/wli/sb/transports">
+          <tran:provider-id>email</tran:provider-id>
+          <tran:inbound>false</tran:inbound>
+          <tran:URI>
+            <env:value>mailto:biemond@gmail.com</env:value>
+          </tran:URI>
+          <tran:provider-specific>
+            <ema1:outbound-properties xmlns:ema1="http://www.bea.com/wli/sb/transports/email">
+              <ema1:smtp-resource ref="System/SMTP Servers/SMTPServer"/>
+              <ema1:connection-timeout>0</ema1:connection-timeout>
+              <ema1:from-address>ebiemond@xs4all.nl</ema1:from-address>
+              <ema1:from-name>OSB</ema1:from-name>
+              <ema1:reply-to-address/>
+              <ema1:reply-to-name/>
+              <ema1:mail-session-jndiname/>
+            </ema1:outbound-properties>
+            <ema1:request-encoding xmlns:ema1="http://www.bea.com/wli/sb/transports/email">iso-8859-1</ema1:request-encoding>
+          </tran:provider-specific>
+        </ema:config>
+      </ema:transport-end-point-config>
+    </aler:config>
+  </aler:Destinations>
+</xml-fragment>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:ws="http://www.bea.com/wli/sb/transports/ws" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/alert/config">
+  <ser:coreEntry isProxy="true" isEnabled="true">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config">
+      <con:wsdl ref="ASynchronous/wsdl/AsyncEmployeeService"/>
+      <con:binding>
+        <con:name>execute_pttBinding</con:name>
+        <con:namespace>http://xmlns.oracle.com/AsyncEmployeeService</con:namespace>
+      </con:binding>
+      <con:selector type="SOAP body"/>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>http</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>/ASynchronous/Request</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>true</tran:all-headers>
+    <tran:provider-specific>
+      <http:inbound-properties/>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router>
+    <con:flow>
+      <con:route-node name="RouteNodeJMS">
+        <con:context>
+          <con2:varNsDecl namespace="http://employee" prefix="emp"/>
+        </con:context>
+        <con:actions>
+          <con1:route>
+            <con2:id>_ActionId-6357642412513987126--18522939.12e16df2863.-7f5d</con2:id>
+            <con1:service ref="ASynchronous/EnqueueJMS" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:outboundTransform>
+              <con3:assign varName="messageId">
+                <con2:id>_ActionId-2695304347610898883-59ec0dfb.12e672abd89.-7f8b</con2:id>
+                <con3:expr>
+                  <con2:xqueryText>$header/wsa05:MessageID/text()</con2:xqueryText>
+                </con3:expr>
+              </con3:assign>
+              <con3:assign varName="replyUrl">
+                <con2:id>_ActionId-2695304347610898883-59ec0dfb.12e672abd89.-7f76</con2:id>
+                <con3:expr>
+                  <con2:xqueryText>$header/wsa05:ReplyTo/wsa05:Address/text()</con2:xqueryText>
+                </con3:expr>
+              </con3:assign>
+              <con3:replace contents-only="true" varName="body">
+                <con2:id>_ActionId-759753226135620392--534f487.12e680735e1.-7f52</con2:id>
+                <con3:expr>
+                  <con2:xqueryText><![CDATA[<msg>
+<body>{$body/emp:Employee}</body>
+<replyUrl>{$replyUrl}</replyUrl>
+</msg>]]></con2:xqueryText>
+                </con3:expr>
+              </con3:replace>
+              <con3:transport-headers>
+                <con2:id>_ActionId-6557121025586918312-57806dde.12e301e23b3.-7fe8</con2:id>
+                <con3:header-set>outbound-request</con3:header-set>
+                <con3:header name="JMSCorrelationID" value="expression">
+                  <con2:xqueryText>$messageId</con2:xqueryText>
+                </con3:header>
+              </con3:transport-headers>
+            </con1:outboundTransform>
+            <con1:responseTransform/>
+          </con1:route>
+        </con:actions>
+      </con:route-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

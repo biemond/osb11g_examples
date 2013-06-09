@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+             version="2.0">
+  <persistence-unit name="mwoperations" transaction-type="JTA">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <jta-data-source>wlsbjmsrpDataSource</jta-data-source>
+    <class>nl.amis.mw.reporting.model.Message</class>
+    <class>nl.amis.mw.reporting.model.MessageDetails</class>
+    <properties>
+      <property name="eclipselink.target-server" value="WebLogic_10"/>
+      <property name="eclipselink.target-database" value="Oracle11"/>
+      <property name="javax.persistence.jtaDataSource" value="wlsbjmsrpDataSource"/>
+      <property name="eclipselink.logging.level" value="WARNING"/>
+      <property name="eclipselink.logging.thread" value="false"/>
+      <property name="eclipselink.logging.session" value="false"/>
+    </properties>
+  </persistence-unit>
+</persistence>

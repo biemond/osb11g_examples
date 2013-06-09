@@ -1,0 +1,38 @@
+<definitions 
+   targetNamespace="http://amis.nl/helloService" 
+   name="HelloWorldService" 
+   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+   xmlns:tns="http://amis.nl/hello"
+   xmlns:svc="http://amis.nl/helloService"  
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+   xmlns="http://schemas.xmlsoap.org/wsdl/" >
+	<types>
+		<xsd:schema>
+			<xsd:import namespace="http://amis.nl/hello" schemaLocation="../xsd/Helloworld.xsd"/>
+		</xsd:schema>
+	</types>
+	<message name="sayHello">
+		<part name="parameters" element="tns:sayHello"/>
+	</message>
+	<message name="sayHelloResponse">
+		<part name="parameters" element="tns:sayHelloResponse"/>
+	</message>
+	<portType name="HelloWorldService">
+		<operation name="sayHello">
+			<input message="svc:sayHello"/>
+			<output message="svc:sayHelloResponse"/>
+		</operation>
+	</portType>
+	<binding name="HelloWorldServiceSoapHttpPortBinding" type="svc:HelloWorldService">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+		<operation name="sayHello">
+			<soap:operation soapAction=""/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+		</operation>
+	</binding>
+</definitions>

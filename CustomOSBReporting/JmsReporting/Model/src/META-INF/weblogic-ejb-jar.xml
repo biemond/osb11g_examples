@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'windows-1252'?>
+<weblogic-ejb-jar xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://www.bea.com/ns/weblogic/weblogic-ejb-jar http://www.bea.com/ns/weblogic/weblogic-ejb-jar/1.0/weblogic-ejb-jar.xsd"
+                  xmlns="http://www.bea.com/ns/weblogic/weblogic-ejb-jar">
+  <weblogic-enterprise-bean>
+    <ejb-name>OSBReportingMDBBean</ejb-name>
+    <message-driven-descriptor>
+      <pool>
+        <max-beans-in-free-pool>1</max-beans-in-free-pool>
+        <initial-beans-in-free-pool>1</initial-beans-in-free-pool>
+      </pool>
+    </message-driven-descriptor>
+    <transaction-descriptor>
+      <trans-timeout-seconds>600</trans-timeout-seconds>
+    </transaction-descriptor>
+    <run-as-principal-name>alsb-system-user</run-as-principal-name>
+  </weblogic-enterprise-bean>
+</weblogic-ejb-jar>

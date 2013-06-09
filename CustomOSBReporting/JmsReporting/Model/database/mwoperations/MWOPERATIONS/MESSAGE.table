@@ -1,0 +1,633 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<table xmlns="http://xmlns.oracle.com/jdeveloper/1111/offlinedb">
+  <ID class="oracle.javatools.db.IdentifierBasedID">
+    <identifier class="java.lang.String">1ece6d91-80cf-4990-a072-4459fa1c8f99</identifier>
+  </ID>
+  <name>MESSAGE</name>
+  <columns>
+    <column>
+      <ID class="oracle.javatools.db.IdentifierBasedID">
+        <identifier class="java.lang.String">aa41f0fc-8b67-4a9e-8bd6-cb5e10c67b67</identifier>
+      </ID>
+      <name>ID</name>
+      <dataTypeUsage class="oracle.javatools.db.datatypes.PredefinedDataTypeUsage">
+        <ID class="oracle.javatools.db.IdentifierBasedID">
+          <identifier class="java.lang.String">77d60177-9bdf-44a7-8965-61c56ee2c47c</identifier>
+        </ID>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.ora.OracleDatabaseImpl</providerClass>
+          <typeName>NUMBER</typeName>
+        </dataTypeID>
+        <properties>
+          <entry>
+            <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+            <value class="oracle.javatools.db.ReferenceID">
+              <parent class="oracle.javatools.db.ReferenceID">
+                <name>ID</name>
+                <parent class="oracle.javatools.db.ReferenceID">
+                  <name>MESSAGE</name>
+                  <identifier class="java.math.BigDecimal">104721</identifier>
+                  <schemaName>MWOPERATIONS</schemaName>
+                  <type>TABLE</type>
+                </parent>
+                <type>COLUMN</type>
+              </parent>
+              <type>DataTypeUsage</type>
+            </value>
+          </entry>
+        </properties>
+      </dataTypeUsage>
+      <notNull>true</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>ID</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>MESSAGE</name>
+              <identifier class="java.math.BigDecimal">104721</identifier>
+              <schemaName>MWOPERATIONS</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <ID class="oracle.javatools.db.IdentifierBasedID">
+        <identifier class="java.lang.String">87167d3c-77e8-4890-b1c3-533004bfc579</identifier>
+      </ID>
+      <name>CONVERSATION_IDENTIFIER</name>
+      <dataTypeUsage class="oracle.javatools.db.datatypes.PredefinedDataTypeUsage">
+        <ID class="oracle.javatools.db.IdentifierBasedID">
+          <identifier class="java.lang.String">ee07de44-cc00-4f8f-9ad5-b303d7b23b32</identifier>
+        </ID>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">40</value>
+          </entry>
+          <entry>
+            <key>unit</key>
+            <value class="java.lang.String">CHAR</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.ora.Oracle9i</providerClass>
+          <typeName>VARCHAR2</typeName>
+        </dataTypeID>
+        <properties>
+          <entry>
+            <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+            <value class="oracle.javatools.db.ReferenceID">
+              <parent class="oracle.javatools.db.ReferenceID">
+                <name>CONVERSATION_ID</name>
+                <parent class="oracle.javatools.db.ReferenceID">
+                  <name>MESSAGE</name>
+                  <identifier class="java.math.BigDecimal">104721</identifier>
+                  <schemaName>MWOPERATIONS</schemaName>
+                  <type>TABLE</type>
+                </parent>
+                <type>COLUMN</type>
+              </parent>
+              <type>DataTypeUsage</type>
+            </value>
+          </entry>
+        </properties>
+      </dataTypeUsage>
+      <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>CONVERSATION_ID</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>MESSAGE</name>
+              <identifier class="java.math.BigDecimal">104721</identifier>
+              <schemaName>MWOPERATIONS</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <ID class="oracle.javatools.db.IdentifierBasedID">
+        <identifier class="java.lang.String">f867a01c-4191-4bd0-b99e-1134f05cf0da</identifier>
+      </ID>
+      <name>MESSAGE_TYPE</name>
+      <dataTypeUsage class="oracle.javatools.db.datatypes.PredefinedDataTypeUsage">
+        <ID class="oracle.javatools.db.IdentifierBasedID">
+          <identifier class="java.lang.String">ef5e8293-1298-4fd5-800e-f1a8deec45a2</identifier>
+        </ID>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">100</value>
+          </entry>
+          <entry>
+            <key>unit</key>
+            <value class="java.lang.String">BYTE</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.ora.Oracle9i</providerClass>
+          <typeName>VARCHAR2</typeName>
+        </dataTypeID>
+        <properties>
+          <entry>
+            <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+            <value class="oracle.javatools.db.ReferenceID">
+              <parent class="oracle.javatools.db.ReferenceID">
+                <name>MESSAGE_TYPE</name>
+                <parent class="oracle.javatools.db.ReferenceID">
+                  <name>MESSAGE</name>
+                  <identifier class="java.math.BigDecimal">104721</identifier>
+                  <schemaName>MWOPERATIONS</schemaName>
+                  <type>TABLE</type>
+                </parent>
+                <type>COLUMN</type>
+              </parent>
+              <type>DataTypeUsage</type>
+            </value>
+          </entry>
+        </properties>
+      </dataTypeUsage>
+      <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>MESSAGE_TYPE</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>MESSAGE</name>
+              <identifier class="java.math.BigDecimal">104721</identifier>
+              <schemaName>MWOPERATIONS</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <ID class="oracle.javatools.db.IdentifierBasedID">
+        <identifier class="java.lang.String">3caaddab-1978-4100-8823-f5dbcc5a13c5</identifier>
+      </ID>
+      <name>MESSAGE_DATE</name>
+      <dataTypeUsage class="oracle.javatools.db.datatypes.PredefinedDataTypeUsage">
+        <ID class="oracle.javatools.db.IdentifierBasedID">
+          <identifier class="java.lang.String">02e4f597-15ef-4dcf-8f3d-742be4908070</identifier>
+        </ID>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.ora.OracleDatabaseImpl</providerClass>
+          <typeName>DATE</typeName>
+        </dataTypeID>
+        <properties>
+          <entry>
+            <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+            <value class="oracle.javatools.db.ReferenceID">
+              <parent class="oracle.javatools.db.ReferenceID">
+                <name>MESSAGE_DATE</name>
+                <parent class="oracle.javatools.db.ReferenceID">
+                  <name>MESSAGE</name>
+                  <identifier class="java.math.BigDecimal">104721</identifier>
+                  <schemaName>MWOPERATIONS</schemaName>
+                  <type>TABLE</type>
+                </parent>
+                <type>COLUMN</type>
+              </parent>
+              <type>DataTypeUsage</type>
+            </value>
+          </entry>
+        </properties>
+      </dataTypeUsage>
+      <notNull>true</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>MESSAGE_DATE</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>MESSAGE</name>
+              <identifier class="java.math.BigDecimal">104721</identifier>
+              <schemaName>MWOPERATIONS</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <ID class="oracle.javatools.db.IdentifierBasedID">
+        <identifier class="java.lang.String">6614387a-08d8-42d3-b7e7-1116fa892c46</identifier>
+      </ID>
+      <name>STATE</name>
+      <dataTypeUsage class="oracle.javatools.db.datatypes.PredefinedDataTypeUsage">
+        <ID class="oracle.javatools.db.IdentifierBasedID">
+          <identifier class="java.lang.String">a9a94bd1-63dd-4ad3-ad43-38b454333c5f</identifier>
+        </ID>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">20</value>
+          </entry>
+          <entry>
+            <key>unit</key>
+            <value class="java.lang.String">BYTE</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.ora.Oracle9i</providerClass>
+          <typeName>VARCHAR2</typeName>
+        </dataTypeID>
+        <properties>
+          <entry>
+            <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+            <value class="oracle.javatools.db.ReferenceID">
+              <parent class="oracle.javatools.db.ReferenceID">
+                <name>STATE</name>
+                <parent class="oracle.javatools.db.ReferenceID">
+                  <name>MESSAGE</name>
+                  <identifier class="java.math.BigDecimal">104721</identifier>
+                  <schemaName>MWOPERATIONS</schemaName>
+                  <type>TABLE</type>
+                </parent>
+                <type>COLUMN</type>
+              </parent>
+              <type>DataTypeUsage</type>
+            </value>
+          </entry>
+        </properties>
+      </dataTypeUsage>
+      <default class="java.lang.String">&apos;OK&apos;</default>
+      <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>STATE</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>MESSAGE</name>
+              <identifier class="java.math.BigDecimal">104721</identifier>
+              <schemaName>MWOPERATIONS</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <ID class="oracle.javatools.db.IdentifierBasedID">
+        <identifier class="java.lang.String">48c6df41-4d6d-45fd-bcbc-2791b7904021</identifier>
+      </ID>
+      <name>SENDER</name>
+      <dataTypeUsage class="oracle.javatools.db.datatypes.PredefinedDataTypeUsage">
+        <ID class="oracle.javatools.db.IdentifierBasedID">
+          <identifier class="java.lang.String">e4a5f1a4-f9c7-4a26-ba2f-48eec8410d1c</identifier>
+        </ID>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">200</value>
+          </entry>
+          <entry>
+            <key>unit</key>
+            <value class="java.lang.String">CHAR</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.ora.Oracle9i</providerClass>
+          <typeName>VARCHAR2</typeName>
+        </dataTypeID>
+        <properties>
+          <entry>
+            <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+            <value class="oracle.javatools.db.ReferenceID">
+              <parent class="oracle.javatools.db.ReferenceID">
+                <name>SENDER</name>
+                <parent class="oracle.javatools.db.ReferenceID">
+                  <name>MESSAGE</name>
+                  <identifier class="java.math.BigDecimal">104721</identifier>
+                  <schemaName>MWOPERATIONS</schemaName>
+                  <type>TABLE</type>
+                </parent>
+                <type>COLUMN</type>
+              </parent>
+              <type>DataTypeUsage</type>
+            </value>
+          </entry>
+        </properties>
+      </dataTypeUsage>
+      <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>SENDER</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>MESSAGE</name>
+              <identifier class="java.math.BigDecimal">104721</identifier>
+              <schemaName>MWOPERATIONS</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <ID class="oracle.javatools.db.IdentifierBasedID">
+        <identifier class="java.lang.String">57c52c8d-697c-4fd2-8764-b61ce136b10b</identifier>
+      </ID>
+      <name>RECEIVER</name>
+      <dataTypeUsage class="oracle.javatools.db.datatypes.PredefinedDataTypeUsage">
+        <ID class="oracle.javatools.db.IdentifierBasedID">
+          <identifier class="java.lang.String">7b14b325-eb14-48b1-9787-427806337a90</identifier>
+        </ID>
+        <attributeValues>
+          <entry>
+            <key>size</key>
+            <value class="java.lang.Long">200</value>
+          </entry>
+          <entry>
+            <key>unit</key>
+            <value class="java.lang.String">CHAR</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <providerClass>oracle.javatools.db.ora.Oracle9i</providerClass>
+          <typeName>VARCHAR2</typeName>
+        </dataTypeID>
+        <properties>
+          <entry>
+            <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+            <value class="oracle.javatools.db.ReferenceID">
+              <parent class="oracle.javatools.db.ReferenceID">
+                <name>RECEIVER</name>
+                <parent class="oracle.javatools.db.ReferenceID">
+                  <name>MESSAGE</name>
+                  <identifier class="java.math.BigDecimal">104721</identifier>
+                  <schemaName>MWOPERATIONS</schemaName>
+                  <type>TABLE</type>
+                </parent>
+                <type>COLUMN</type>
+              </parent>
+              <type>DataTypeUsage</type>
+            </value>
+          </entry>
+        </properties>
+      </dataTypeUsage>
+      <notNull>false</notNull>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>RECEIVER</name>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>MESSAGE</name>
+              <identifier class="java.math.BigDecimal">104721</identifier>
+              <schemaName>MWOPERATIONS</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <type>COLUMN</type>
+          </value>
+        </entry>
+      </properties>
+    </column>
+  </columns>
+  <constraints>
+    <constraint class="oracle.javatools.db.PKConstraint">
+      <ID class="oracle.javatools.db.IdentifierBasedID">
+        <identifier class="java.lang.String">dffcc040-360d-4dc3-9be5-7e9d7ea38146</identifier>
+      </ID>
+      <name>MESSAGE_PK</name>
+      <columnIDs>
+        <columnID class="oracle.javatools.db.IdentifierBasedID">
+          <name>ID</name>
+          <identifier class="java.lang.String">aa41f0fc-8b67-4a9e-8bd6-cb5e10c67b67</identifier>
+          <parent class="oracle.javatools.db.IdentifierBasedID">
+            <name>MESSAGE</name>
+            <identifier class="java.lang.String">1ece6d91-80cf-4990-a072-4459fa1c8f99</identifier>
+            <schemaName>MWOPERATIONS</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>MWOPERATIONS</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+      </columnIDs>
+      <enabled>true</enabled>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>MESSAGE_PK</name>
+            <childObjectNames>
+              <childObjectName>ID</childObjectName>
+            </childObjectNames>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>MESSAGE</name>
+              <identifier class="java.math.BigDecimal">104721</identifier>
+              <schemaName>MWOPERATIONS</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <subType>PKConstraint</subType>
+            <type>CONSTRAINT</type>
+          </value>
+        </entry>
+      </properties>
+    </constraint>
+  </constraints>
+  <indexes>
+    <indexe>
+      <ID class="oracle.javatools.db.IdentifierBasedID">
+        <identifier class="java.lang.String">92d6ccf3-37a2-45c3-a800-7d5d3a8ca2e8</identifier>
+      </ID>
+      <name>MESSAGE_CONVERSATION_IDX</name>
+      <columnExpressions>
+        <columnExpression>
+          <ID class="oracle.javatools.db.IdentifierBasedID">
+            <identifier class="java.lang.String">5946fa7e-3228-49ad-b0f4-d398f9163c61</identifier>
+          </ID>
+          <expression class="oracle.javatools.db.sql.ColumnUsage">
+            <ID class="oracle.javatools.db.IdentifierBasedID">
+              <identifier class="java.lang.String">f8e5668f-3b8f-47b4-8f4b-581194f35cfc</identifier>
+            </ID>
+            <objectID class="oracle.javatools.db.IdentifierBasedID">
+              <name>CONVERSATION_ID</name>
+              <identifier class="java.lang.String">87167d3c-77e8-4890-b1c3-533004bfc579</identifier>
+              <parent class="oracle.javatools.db.IdentifierBasedID">
+                <name>MESSAGE</name>
+                <identifier class="java.lang.String">1ece6d91-80cf-4990-a072-4459fa1c8f99</identifier>
+                <schemaName>MWOPERATIONS</schemaName>
+                <type>TABLE</type>
+              </parent>
+              <schemaName>MWOPERATIONS</schemaName>
+              <type>COLUMN</type>
+            </objectID>
+            <outerJoin>false</outerJoin>
+            <properties>
+              <entry>
+                <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+                <value class="oracle.javatools.db.ReferenceID">
+                  <parent class="oracle.javatools.db.ReferenceID">
+                    <parent class="oracle.javatools.db.ReferenceID">
+                      <name>MESSAGE_CONVERSATION_IDX</name>
+                      <identifier class="java.lang.Integer">104723</identifier>
+                      <parent class="oracle.javatools.db.ReferenceID">
+                        <name>MESSAGE</name>
+                        <identifier class="java.math.BigDecimal">104721</identifier>
+                        <schemaName>MWOPERATIONS</schemaName>
+                        <type>TABLE</type>
+                      </parent>
+                      <schemaName>MWOPERATIONS</schemaName>
+                      <type>INDEX</type>
+                    </parent>
+                    <type>IndexObject</type>
+                  </parent>
+                  <type>SQLFragment</type>
+                </value>
+              </entry>
+            </properties>
+            <qualified>true</qualified>
+          </expression>
+          <order>ASC</order>
+          <properties>
+            <entry>
+              <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+              <value class="oracle.javatools.db.ReferenceID">
+                <parent class="oracle.javatools.db.ReferenceID">
+                  <name>MESSAGE_CONVERSATION_IDX</name>
+                  <identifier class="java.lang.Integer">104723</identifier>
+                  <parent class="oracle.javatools.db.ReferenceID">
+                    <name>MESSAGE</name>
+                    <identifier class="java.math.BigDecimal">104721</identifier>
+                    <schemaName>MWOPERATIONS</schemaName>
+                    <type>TABLE</type>
+                  </parent>
+                  <schemaName>MWOPERATIONS</schemaName>
+                  <type>INDEX</type>
+                </parent>
+                <type>IndexObject</type>
+              </value>
+            </entry>
+          </properties>
+        </columnExpression>
+      </columnExpressions>
+      <indexType>NORMAL</indexType>
+      <parallelDegree>1</parallelDegree>
+      <properties>
+        <entry>
+          <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+          <value class="oracle.javatools.db.ReferenceID">
+            <name>MESSAGE_CONVERSATION_IDX</name>
+            <identifier class="java.lang.Integer">104723</identifier>
+            <parent class="oracle.javatools.db.ReferenceID">
+              <name>MESSAGE</name>
+              <identifier class="java.math.BigDecimal">104721</identifier>
+              <schemaName>MWOPERATIONS</schemaName>
+              <type>TABLE</type>
+            </parent>
+            <schemaName>MWOPERATIONS</schemaName>
+            <type>INDEX</type>
+          </value>
+        </entry>
+        <entry>
+          <key>OracleStorageProperties</key>
+          <value class="oracle.javatools.db.ora.OracleStorageProperties">
+            <ID class="oracle.javatools.db.IdentifierBasedID">
+              <identifier class="java.lang.String">98712288-b484-4019-add1-fe61fcb4fd5a</identifier>
+            </ID>
+            <bufferMode>DEFAULT</bufferMode>
+            <initrans>2</initrans>
+            <logging>true</logging>
+            <percentFree>10</percentFree>
+            <properties>
+              <entry>
+                <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+                <value class="oracle.javatools.db.ReferenceID">
+                  <parent class="oracle.javatools.db.ReferenceID">
+                    <name>MESSAGE_CONVERSATION_IDX</name>
+                    <identifier class="java.lang.Integer">104723</identifier>
+                    <parent class="oracle.javatools.db.ReferenceID">
+                      <name>MESSAGE</name>
+                      <identifier class="java.math.BigDecimal">104721</identifier>
+                      <schemaName>MWOPERATIONS</schemaName>
+                      <type>TABLE</type>
+                    </parent>
+                    <schemaName>MWOPERATIONS</schemaName>
+                    <type>INDEX</type>
+                  </parent>
+                  <type>OracleStorageProperties</type>
+                </value>
+              </entry>
+            </properties>
+            <tablespaceID class="oracle.javatools.db.ReferenceID">
+              <name>USERS</name>
+              <type>TABLESPACE</type>
+            </tablespaceID>
+          </value>
+        </entry>
+      </properties>
+      <schema>
+        <name>MWOPERATIONS</name>
+      </schema>
+    </indexe>
+  </indexes>
+  <properties>
+    <entry>
+      <key>OfflineDBConstants.IMPORT_SOURCE_CONNECTION</key>
+      <value class="java.lang.String">mwoperations</value>
+    </entry>
+    <entry>
+      <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+      <value class="oracle.javatools.db.ReferenceID">
+        <name>MESSAGE</name>
+        <identifier class="java.math.BigDecimal">104721</identifier>
+        <schemaName>MWOPERATIONS</schemaName>
+        <type>TABLE</type>
+      </value>
+    </entry>
+    <entry>
+      <key>OracleStorageProperties</key>
+      <value class="oracle.javatools.db.ora.OracleStorageProperties">
+        <ID class="oracle.javatools.db.IdentifierBasedID">
+          <identifier class="java.lang.String">596827ed-628c-406e-938d-885b855ac9f8</identifier>
+        </ID>
+        <bufferMode>DEFAULT</bufferMode>
+        <initrans>1</initrans>
+        <logging>true</logging>
+        <percentFree>10</percentFree>
+        <properties>
+          <entry>
+            <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+            <value class="oracle.javatools.db.ReferenceID">
+              <parent class="oracle.javatools.db.ReferenceID">
+                <name>MESSAGE</name>
+                <identifier class="java.math.BigDecimal">104721</identifier>
+                <schemaName>MWOPERATIONS</schemaName>
+                <type>TABLE</type>
+              </parent>
+              <type>OracleStorageProperties</type>
+            </value>
+          </entry>
+        </properties>
+        <tablespaceID class="oracle.javatools.db.ReferenceID">
+          <name>USERS</name>
+          <type>TABLESPACE</type>
+        </tablespaceID>
+      </value>
+    </entry>
+    <entry>
+      <key>TableType</key>
+      <value class="oracle.javatools.db.Table$TableType">NORMAL</value>
+    </entry>
+  </properties>
+  <schema>
+    <name>MWOPERATIONS</name>
+  </schema>
+</table>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config">
+  <ser:coreEntry isProxy="true" isEnabled="true">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config">
+      <con:wsdl ref="General/wsdl/HelloworldNormal"/>
+      <con:binding>
+        <con:name>HelloWorldServiceSoapHttpPortBinding</con:name>
+        <con:namespace>http://amis.nl/helloService</con:namespace>
+      </con:binding>
+      <con:selector type="SOAP body"/>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>http</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>/Last/LastProxy</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>false</tran:all-headers>
+    <tran:provider-specific>
+      <http:inbound-properties/>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router>
+    <con:pipeline type="request" name="PipelinePairNode1_request">
+      <con:stage name="stage1">
+        <con:context>
+          <con1:varNsDecl namespace="http://amis.nl/hello" prefix="hel"/>
+        </con:context>
+        <con:actions>
+          <con2:report>
+            <con1:id>_ActionId-1240029025997526250-742f0448.13f2a37d781.-7e41</con1:id>
+          </con2:report>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNode1_response">
+      <con:stage name="stage1">
+        <con:context>
+          <con1:varNsDecl namespace="http://amis.nl/hello" prefix="hel"/>
+        </con:context>
+        <con:actions>
+          <con3:ifThenElse>
+            <con1:id>_ActionId-8874161634206215674-7d4e526.13f2a741e56.-7f39</con1:id>
+            <con3:case>
+              <con3:condition>
+                <con1:xqueryText>$body/hel:sayHello/hel:message/text() != 'hello'</con1:xqueryText>
+              </con3:condition>
+              <con3:actions>
+                <con3:Error>
+                  <con1:id>_ActionId-8874161634206215674-7d4e526.13f2a741e56.-7f38</con1:id>
+                  <con3:errCode>AMIS-001</con3:errCode>
+                  <con3:message>The greeting is not hello</con3:message>
+                </con3:Error>
+              </con3:actions>
+            </con3:case>
+            <con3:default>
+              <con3:replace varName="body" contents-only="true">
+                <con1:id>_ActionId-8874161634206215674-7d4e526.13f2a741e56.-7f36</con1:id>
+                <con3:location>
+                  <con1:xpathText>.</con1:xpathText>
+                </con3:location>
+                <con3:expr>
+                  <con1:xqueryText><![CDATA[<hel:sayHelloResponse>
+  <hel:header>
+        <hel:conversationId>{$body/hel:sayHello/hel:header/hel:conversationId/text()}</hel:conversationId>
+        <hel:sender>{$body/hel:sayHello/hel:header/hel:receiver/text()}</hel:sender>
+        <hel:receiver>{$body/hel:sayHello/hel:header/hel:sender/text()}</hel:receiver>
+        <hel:messageType>{$body/hel:sayHello/hel:header/hel:messageType/text()}</hel:messageType>
+ </hel:header>
+ <hel:return>Hi back</hel:return>
+</hel:sayHelloResponse>]]></con1:xqueryText>
+                </con3:expr>
+              </con3:replace>
+            </con3:default>
+          </con3:ifThenElse>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:pipeline-node name="PipelinePairNode1">
+        <con:request>PipelinePairNode1_request</con:request>
+        <con:response>PipelinePairNode1_response</con:response>
+      </con:pipeline-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

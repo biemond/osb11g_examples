@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<schema xmlns="http://xmlns.oracle.com/jdeveloper/1111/offlinedb">
+  <ID class="oracle.javatools.db.IdentifierBasedID">
+    <identifier class="java.lang.String">d894e030-580d-4b0d-a21e-abda4dfe370f</identifier>
+  </ID>
+  <name>MWOPERATIONS</name>
+</schema>

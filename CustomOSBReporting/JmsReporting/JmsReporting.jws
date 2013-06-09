@@ -59,6 +59,10 @@
                      <hash n="filters">
                         <list n="rules">
                            <hash>
+                              <value n="pattern" v="com.bea.core.xml.xmlbeans_2.2.0.0.jar"/>
+                              <value n="type" v="1"/>
+                           </hash>
+                           <hash>
                               <value n="pattern" v="**"/>
                            </hash>
                         </list>

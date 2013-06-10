@@ -54,6 +54,9 @@
           </con4:assign>
           <con2:report>
             <con1:id>_ActionId-1240029025997526250-742f0448.13f2a37d781.-7e41</con1:id>
+            <con2:expr>
+              <con1:xqueryText>$body/*</con1:xqueryText>
+            </con2:expr>
             <con2:labels>
               <con2:key>ConversationIdentifier</con2:key>
               <con2:varName>body</con2:varName>
@@ -130,6 +133,9 @@
         <con:actions>
           <con2:report>
             <con1:id>_ActionId-7571630928446886200--30cd44d9.13f2f5d2fa6.-7fe1</con1:id>
+            <con2:expr>
+              <con1:xqueryText>$body/*</con1:xqueryText>
+            </con2:expr>
             <con2:labels>
               <con2:key>ConversationIdentifier</con2:key>
               <con2:varName>body</con2:varName>

@@ -59,7 +59,7 @@
       <string v="oracle.toplink.workbench.addin/toplinkContentSet"/>
       <string v="oracle.tip.tools.ide.fabric.addin.SCAContentSetProvider/sca-content"/>
    </list>
-   <value n="defaultPackage" v="tennet.eu.mw.reporting.model"/>
+   <value n="defaultPackage" v="nl.amis.mw.reporting.model"/>
    <hash n="ejbModuleContainer">
       <value n="cmpProvider" v="EJB 3.0"/>
       <value n="dbConnection" v="mwoperations"/>

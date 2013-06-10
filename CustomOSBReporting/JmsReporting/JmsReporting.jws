@@ -2,10 +2,17 @@
 <jws:workspace xmlns:jws="http://xmlns.oracle.com/ide/project">
    <hash n="adrs-workspace-properties">
       <value n="adrs-instance-binding" v="DefaultServer"/>
+      <value n="deploy-timeout" v="0"/>
+      <value n="runtime-application-name" v=""/>
    </hash>
-   <value n="application-package-prefix" v="tennet.eu.mw.reporting"/>
+   <value n="application-package-prefix" v="nl.amis.mw.reporting"/>
    <url n="application-source-directory" path="src/"/>
    <value n="appTemplateId" v="#genericApplicationTemplate"/>
+   <hash n="appWebServicePolicy">
+      <value n="location"/>
+      <value n="LOCATION_TYPE" v="policy.config.PolicyOptions.LocationType.FILE_STORE"/>
+      <value n="SERVER_LOCATION" v="IntegratedWebLogicServer"/>
+   </hash>
    <hash n="component-versions">
       <value n="oracle.adf.share.dt.migration.jps.JaznCredStoreMigratorHelper" v="11.1.1.1.0"/>
       <value n="oracle.adfdt.controller.adfc.source.migration.SavePointDataSourceForWLSMigrator" v="11.1.1.1.0"/>
@@ -37,8 +44,8 @@
                   </hash>
                </list>
             </hash>
-            <url n="earURL" path="deploy/TenneTOSBReporting.ear"/>
-            <value n="enterpriseAppName" v="TenneTOSBReporting"/>
+            <url n="earURL" path="deploy/OSBReporting.ear"/>
+            <value n="enterpriseAppName" v="OSBReporting"/>
             <hash n="fileGroups">
                <list n="groups">
                   <hash>
@@ -75,6 +82,9 @@
             </hash>
             <hash n="libraryDependencies">
                <value n="IncludeLibrariesFromOtherContainers" v="true"/>
+               <list n="unselectedLibraries">
+                  <string v="Com.bea.core.xml.xmlbeans_2.2.0.0.jar"/>
+               </list>
             </hash>
             <value n="platformType" v="WEBLOGIC"/>
             <value n="platformVersion" v="10.3.0.0"/>
@@ -89,5 +99,10 @@
       <value n="Security-Deployment-Overwrite-Application-Policies-Key" v="false"/>
       <value n="Security-Deployment-Overwrite-Credentials-Key" v="false"/>
       <value n="Weblogic-JDBC-Auto-Sync-Key" v="false"/>
+   </hash>
+   <hash n="oracle.mds.internal.dt.ide.CustOptions">
+      <list n="customizationLibraries">
+         <hash/>
+      </list>
    </hash>
 </jws:workspace>

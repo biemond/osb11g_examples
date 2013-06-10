@@ -46,13 +46,40 @@
           <con1:varNsDecl namespace="http://amis.nl/hello" prefix="hel"/>
         </con:context>
         <con:actions>
+          <con4:assign varName="messageID" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
+            <con5:id xmlns:con5="http://www.bea.com/wli/sb/stages/config">_ActionId-7571630928446886200--30cd44d9.13f2f5d2fa6.-7edb</con5:id>
+            <con4:expr>
+              <con5:xqueryText xmlns:con5="http://www.bea.com/wli/sb/stages/config">&lt;messageID>{$messageID}&lt;/messageID></con5:xqueryText>
+            </con4:expr>
+          </con4:assign>
           <con2:report>
             <con1:id>_ActionId-1240029025997526250-742f0448.13f2a37d781.-7e41</con1:id>
+            <con2:labels>
+              <con2:key>ConversationIdentifier</con2:key>
+              <con2:varName>body</con2:varName>
+              <con2:value>
+                <con1:xpathText>./hel:sayHello/hel:header/hel:conversationId</con1:xpathText>
+              </con2:value>
+            </con2:labels>
+            <con2:labels>
+              <con2:key>MessageType</con2:key>
+              <con2:varName>body</con2:varName>
+              <con2:value>
+                <con1:xpathText>./hel:sayHello/hel:header/hel:messageType</con1:xpathText>
+              </con2:value>
+            </con2:labels>
+            <con2:labels>
+              <con2:key>ComponentIdentifier</con2:key>
+              <con2:varName>messageID</con2:varName>
+              <con2:value>
+                <con1:xpathText>/messageID/text()</con1:xpathText>
+              </con2:value>
+            </con2:labels>
           </con2:report>
         </con:actions>
       </con:stage>
     </con:pipeline>
-    <con:pipeline type="response" name="PipelinePairNode1_response">
+    <con:pipeline type="response" name="PipelinePairNode1_response" errorHandler="_onErrorHandler-7571630928446886200--30cd44d9.13f2f5d2fa6.-8000">
       <con:stage name="stage1">
         <con:context>
           <con1:varNsDecl namespace="http://amis.nl/hello" prefix="hel"/>
@@ -92,6 +119,35 @@
               </con3:replace>
             </con3:default>
           </con3:ifThenElse>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="error" name="_onErrorHandler-7571630928446886200--30cd44d9.13f2f5d2fa6.-8000">
+      <con:stage name="stage1">
+        <con:context>
+          <con1:varNsDecl namespace="http://amis.nl/hello" prefix="hel"/>
+        </con:context>
+        <con:actions>
+          <con2:report>
+            <con1:id>_ActionId-7571630928446886200--30cd44d9.13f2f5d2fa6.-7fe1</con1:id>
+            <con2:labels>
+              <con2:key>ConversationIdentifier</con2:key>
+              <con2:varName>body</con2:varName>
+              <con2:value>
+                <con1:xpathText>./hel:sayHello/hel:header/hel:conversationId</con1:xpathText>
+              </con2:value>
+            </con2:labels>
+            <con2:labels>
+              <con2:key>ComponentIdentifier</con2:key>
+              <con2:varName>messageID</con2:varName>
+              <con2:value>
+                <con1:xpathText>/messageID/text()</con1:xpathText>
+              </con2:value>
+            </con2:labels>
+          </con2:report>
+          <con1:reply isError="true">
+            <con1:id>_ActionId-7571630928446886200--30cd44d9.13f2f5d2fa6.-7fa8</con1:id>
+          </con1:reply>
         </con:actions>
       </con:stage>
     </con:pipeline>

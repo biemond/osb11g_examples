@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config">
   <ser:coreEntry isProxy="true" isEnabled="true">
     <ser:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config">
       <con:wsdl ref="General/wsdl/HelloworldNormal"/>
@@ -36,20 +36,58 @@
   <ser:router>
     <con:pipeline type="request" name="PipelinePairNode1_request">
       <con:stage name="stage1">
-        <con:context/>
+        <con:context>
+          <con2:varNsDecl namespace="http://amis.nl/hello" prefix="hel"/>
+        </con:context>
         <con:actions>
+          <con4:assign varName="messageID">
+            <con2:id>_ActionId-7571630928446886200--30cd44d9.13f2f5d2fa6.-7f13</con2:id>
+            <con4:expr>
+              <con2:xqueryText>&lt;messageID>{$messageID}&lt;/messageID></con2:xqueryText>
+            </con4:expr>
+          </con4:assign>
           <con1:report>
             <con2:id>_ActionId-1240029025997526250-742f0448.13f2a37d781.-7d15</con2:id>
+            <con1:labels>
+              <con1:key>ConversationIdentifier</con1:key>
+              <con1:varName>body</con1:varName>
+              <con1:value>
+                <con2:xpathText>./hel:sayHello/hel:header/hel:conversationId</con2:xpathText>
+              </con1:value>
+            </con1:labels>
+            <con1:labels>
+              <con1:key>ComponentIdentifier</con1:key>
+              <con1:varName>messageID</con1:varName>
+              <con1:value>
+                <con2:xpathText>/messageID/text()</con2:xpathText>
+              </con1:value>
+            </con1:labels>
           </con1:report>
         </con:actions>
       </con:stage>
     </con:pipeline>
     <con:pipeline type="response" name="PipelinePairNode1_response">
       <con:stage name="stage1">
-        <con:context/>
+        <con:context>
+          <con2:varNsDecl namespace="http://amis.nl/hello" prefix="hel"/>
+        </con:context>
         <con:actions>
           <con1:report>
             <con2:id>_ActionId-1240029025997526250-742f0448.13f2a37d781.-7d36</con2:id>
+            <con1:labels>
+              <con1:key>ConversationIdentifier</con1:key>
+              <con1:varName>body</con1:varName>
+              <con1:value>
+                <con2:xpathText>./hel:sayHelloResponse/hel:header/hel:conversationId</con2:xpathText>
+              </con1:value>
+            </con1:labels>
+            <con1:labels>
+              <con1:key>ComponentIdentifier</con1:key>
+              <con1:varName>messageID</con1:varName>
+              <con1:value>
+                <con2:xpathText>/messageID/text()</con2:xpathText>
+              </con1:value>
+            </con1:labels>
           </con1:report>
         </con:actions>
       </con:stage>

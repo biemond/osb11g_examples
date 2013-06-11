@@ -1,7 +1,7 @@
 CustomOSBReporting
 ==================
 
-Make use conversationId and is handy when you have multiple calling proxies
+Make use conversationId and is handy when you have multiple calling proxies  
 for more info read this blog [biemond.blogspot.com](http://biemond.blogspot.nl/2013/06/custom-osb-reporting-provider.html)  
 
 
